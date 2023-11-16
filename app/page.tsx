@@ -2,6 +2,7 @@
 import { Chess } from "chess.js";
 import React, { useMemo, useState } from "react";
 import { Chessboard } from "react-chessboard";
+import { Engine } from "./Engine";
 
 const buttonStyle = {
   padding: "10px 20px",
@@ -16,38 +17,6 @@ const boardWrapper = {
   height: "100vh",
   backgroundColor: "#f0d9b5",
 };
-class Engine {
-  stockfish: Worker;
-  onMessage: (callback: (e: any) => void) => void;
-  // sendMessage: (message: any) => void;
-
-  constructor() {
-    this.stockfish = new Worker("./stockfish.js");
-    this.onMessage = (callback) => {
-      this.stockfish.addEventListener("message", (e) => {
-        const bestMove = e.data?.match(/bestmove\s+(\S+)/)?.[1];
-        callback({ bestMove });
-      });
-    };
-    // Init engine
-    this.onMessage(() => "uci");
-    this.onMessage(() => "isready");
-  }
-  sendMessage(arg0: string) {
-    throw new Error("Method not implemented.");
-  }
-
-  evaluatePosition(fen: any, depth: any) {
-    this.stockfish.postMessage(`position fen ${fen}`);
-    this.stockfish.postMessage(`go depth ${depth}`);
-  }
-  stop() {
-    this.onMessage(() => "stop"); // Run when changing positions
-  }
-  quit() {
-    this.onMessage(() => "quit"); // Good to run this before unmounting.
-  }
-}
 
 const HomePage = () => {
   const levels = {
@@ -73,7 +42,7 @@ const HomePage = () => {
         //   promotion: bestMove.substring(4, 5),
         // });
         game.move(bestMove);
-        console.log("bestMove", bestMove);
+        // console.log("bestMove", bestMove);
         setGamePosition(game.fen());
       }
     });

@@ -10,13 +10,15 @@
   },
   "dependencies": {
     "chess.js": "^1.0.0-beta.6",
+    "loose-envify": "^1.4.0",
     "next": "14.0.2",
     "react": "^18",
     "react-chessboard": "^4.3.2",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "web-worker": "^1.2.0"
   },
   "devDependencies": {
-    "@types/node": "^20",
+    "@types/node": "^20.9.0",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
