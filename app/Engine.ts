@@ -22,7 +22,6 @@ interface Worker extends EventTarget, AbstractWorker {
   addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
   removeEventListener<K extends keyof WorkerEventMap>(type: K, listener: (this: Worker, ev: WorkerEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
   removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
-  // constructor(scriptURL: string | URL, options?: WorkerOptions | undefined): Worker;
 }
 
 
